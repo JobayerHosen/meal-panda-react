@@ -1,19 +1,23 @@
 import { Button, Grid } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
+import { cartContext } from "../../App";
 import Box from "@mui/material/Box";
 import { alpha } from "@mui/material/styles";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 const Meal = (props) => {
-  const { meal, addToCart } = props;
+  const { meal } = props;
+  const { handleAddToCart } = useContext(cartContext);
+
   return (
-    <Grid color="dark" item xs={12} sm={6} md={4} lg={3}>
+    <Grid color="background.paper" item xs={12} sm={6} md={4} lg={3}>
       <Box
         sx={{
           display: "flex",
           flexDirection: { xs: "column" },
           alignItems: "center",
           bgcolor: "background.paper",
+          color: "text.primary",
           overflow: "visible",
           borderRadius: "12px",
           boxShadow: 1,
@@ -55,7 +59,7 @@ const Meal = (props) => {
             Price: $ {Math.round(Math.random() * 200 + 200)}
           </Box>
           <Button
-            onClick={() => addToCart(meal.idMeal)}
+            onClick={() => handleAddToCart(meal.idMeal)}
             variant="contained"
             color="primary"
             sx={{

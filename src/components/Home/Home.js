@@ -3,13 +3,15 @@ import { Box } from "@mui/system";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Meals from "./Meals/Meals";
+import useMeals from "../../hooks/useMeals";
 
 const Home = (props) => {
   const { category } = useParams();
   const [categories, setCategories] = useState(["all"]);
-  const [meals, setMeals] = useState([]);
-  const { searching, addToCart } = props;
-  const [cart, setCart] = useState([]);
+  const { searching } = props;
+
+  // fetch data according to url or search text
+  const [meals, setMeals] = useMeals(searching, category);
 
   // get all category list
   useEffect(() => {
@@ -22,32 +24,13 @@ const Home = (props) => {
       });
   }, []);
 
-  // fetch data according to url or search text
-  useEffect(() => {
-    fetch(
-      `https://www.themealdb.com/api/json/v1/1/search.php?s=${
-        searching ? searching : !category || category === "all" ? "" : category
-      }`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.meals) setMeals(data.meals);
-      });
-  }, [searching, category]);
-
-  const handelAddToCart = (meal) => {
-    const newCart = [...cart, meal];
-    setCart(newCart);
-    console.log(cart);
-  };
-
   return (
     <div>
       <Box sx={{ mb: "2rem" }}>
         <BasicTabs categories={categories}></BasicTabs>
       </Box>
 
-      <Meals addToCart={handelAddToCart} meals={meals} category={category}></Meals>
+      <Meals meals={meals} category={category}></Meals>
     </div>
   );
 };

@@ -1,11 +1,22 @@
 import React from "react";
-import { Box } from "@mui/system";
-import { Container, Fab, TextField, Typography } from "@mui/material";
+import { Box, styled } from "@mui/system";
+import { Container, TextField, Typography } from "@mui/material";
+import Badge from "@mui/material/Badge";
 import SearchIcon from "@mui/icons-material/Search";
-import { ShoppingCartRounded } from "@mui/icons-material";
+import CartButton from "../CartButton/CartButton";
+
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  "& .MuiBadge-badge": {
+    right: 26,
+    top: 26,
+    border: `2px solid ${theme.palette.text.primary}`,
+    padding: "0 4px",
+  },
+}));
 
 const Header = (props) => {
   const { onSearch } = props;
+
   return (
     <>
       <Container sx={{ marginBottom: "1rem" }} maxWidth="false">
@@ -45,9 +56,8 @@ const Header = (props) => {
               <SearchIcon></SearchIcon>
             </TextField>
           </Box>
-          <Fab size="small" color="primary" aria-label="add">
-            <ShoppingCartRounded></ShoppingCartRounded>
-          </Fab>
+
+          <CartButton />
         </Box>
       </Container>
     </>
