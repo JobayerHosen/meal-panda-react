@@ -7,18 +7,12 @@ import { ThemeProvider } from "@mui/material/styles";
 import { createContext, useState } from "react";
 import * as themes from "./utilities/themes";
 import { Box } from "@mui/system";
-
-export const cartContext = createContext({});
+import { CartContext } from "./context/CartContext";
 
 function App() {
   const [searching, setSearching] = useState();
   const [theme, setTheme] = useState(themes.dark);
   const [cart, setCart] = useState([]);
-
-  const handleAddToCart = (meal) => {
-    const newCart = [...cart, meal];
-    setCart(newCart);
-  };
 
   const handleSearch = (value) => {
     setSearching(value);
@@ -26,15 +20,18 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <cartContext.Provider value={{ cart, handleAddToCart }}>
+      <CartContext.Provider value={[cart, setCart]}>
         <Box bgcolor="background.default" className="App">
           <Router>
             <Header onSearch={handleSearch}></Header>
             <Switch>
-              <Route exact path="/">
+              <Route path="/shop/:category">
                 <Home searching={searching}></Home>
               </Route>
-              <Route path="/:category">
+              <Route exact path="/shop">
+                <Home searching={searching}></Home>
+              </Route>
+              <Route exact path="/">
                 <Home searching={searching}></Home>
               </Route>
               <Route path="*">
@@ -43,7 +40,7 @@ function App() {
             </Switch>
           </Router>
         </Box>
-      </cartContext.Provider>
+      </CartContext.Provider>
     </ThemeProvider>
   );
 }

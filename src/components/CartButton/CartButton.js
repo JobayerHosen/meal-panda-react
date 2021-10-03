@@ -3,7 +3,7 @@ import { styled } from "@mui/system";
 import { Fab } from "@mui/material";
 import Badge from "@mui/material/Badge";
 import { ShoppingCartRounded } from "@mui/icons-material";
-import { cartContext } from "../../App";
+import { CartContext } from "../../context/CartContext";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   "& .MuiBadge-badge": {
@@ -15,7 +15,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 const CartButton = () => {
-  const { cart } = useContext(cartContext);
+  const [cart, setCart] = useContext(CartContext);
 
   return (
     <Fab size="small" color="primary" aria-label="add">

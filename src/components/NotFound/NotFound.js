@@ -1,9 +1,16 @@
 import React from "react";
+import Typography from "@mui/material/Typography";
+import { Container } from "@mui/material";
 
 const NotFound = () => {
   return (
     <div>
-      <h1>404 Not Found</h1>
+      <Container maxWidth="md">
+        <img src="/2456050.svg"></img>
+        <Typography variant="h4" color="text.primary" component="div" gutterBottom>
+          Page Not Found
+        </Typography>
+      </Container>
     </div>
   );
 };

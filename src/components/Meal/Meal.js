@@ -1,16 +1,18 @@
 import { Button, Grid } from "@mui/material";
 import React, { useContext } from "react";
-import { cartContext } from "../../App";
 import Box from "@mui/material/Box";
 import { alpha } from "@mui/material/styles";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import addToCart from "../../lib/addToCart";
+import { CartContext } from "../../context/CartContext";
 
 const Meal = (props) => {
   const { meal } = props;
-  const { handleAddToCart } = useContext(cartContext);
+
+  const [cart, setCart] = useContext(CartContext);
 
   return (
-    <Grid color="background.paper" item xs={12} sm={6} md={4} lg={3}>
+    <Grid item xs={12} sm={6} md={4} lg={3}>
       <Box
         sx={{
           display: "flex",
@@ -56,10 +58,10 @@ const Meal = (props) => {
             Area: {meal.strArea}
           </Box>
           <Box component="span" sx={{ fontSize: 26, mt: 1 }}>
-            Price: $ {Math.round(Math.random() * 200 + 200)}
+            Price: $ {236}
           </Box>
           <Button
-            onClick={() => handleAddToCart(meal.idMeal)}
+            onClick={() => addToCart(cart, setCart, meal.idMeal)}
             variant="contained"
             color="primary"
             sx={{

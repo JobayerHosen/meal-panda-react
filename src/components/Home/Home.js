@@ -2,7 +2,7 @@ import BasicTabs from "../BasicTabs/BasicTabs";
 import { Box } from "@mui/system";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Meals from "./Meals/Meals";
+import Meals from "../Meals/Meals";
 import useMeals from "../../hooks/useMeals";
 
 const Home = (props) => {
@@ -15,7 +15,6 @@ const Home = (props) => {
 
   // get all category list
   useEffect(() => {
-    //{"meals":[{"strCategory":"Beef"},{"strCategory":"Seafood"},...]}
     fetch("https://themealdb.com/api/json/v1/1/list.php?c=list")
       .then((res) => res.json())
       .then(({ meals }) => {
